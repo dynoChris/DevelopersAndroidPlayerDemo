@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.list_videos_screen.arch.callbacks;
+package com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.callbacks;
 
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 

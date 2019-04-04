@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.list_videos_screen.adapters;
+package com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
