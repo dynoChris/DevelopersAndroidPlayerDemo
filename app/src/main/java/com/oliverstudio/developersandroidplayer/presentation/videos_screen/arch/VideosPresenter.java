@@ -5,16 +5,14 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.callbacks.BackToPresenterCallback;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.callbacks.PresenterToRepositoryCallback;
 import com.oliverstudio.developersandroidplayer.utils.Utils;
 
 import java.util.List;
 
 @InjectViewState
-public class VideosPresenter extends MvpPresenter<VideosView> implements BackToPresenterCallback {
+public class VideosPresenter extends MvpPresenter<VideosView> implements BackToPresenter {
 
-    private PresenterToRepositoryCallback mRepository;
+    private VideosRepository mRepository;
 
     public VideosPresenter() {
         mRepository = new VideosRepository(this);
@@ -23,6 +21,10 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
     public void getVideos(String nextPageToken) {
         getViewState().showProgressBar();
         mRepository.getVideos(nextPageToken);
+    }
+
+    public void openVideo(String id) {
+        Log.d(Utils.TAG, "ID: " + id);
     }
 
     @Override

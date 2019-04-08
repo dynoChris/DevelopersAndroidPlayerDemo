@@ -13,6 +13,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters.RecyclerToActivity;
 import com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters.VideoRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.VideosPresenter;
 import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.VideosView;
@@ -20,7 +21,7 @@ import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideosActivity extends MvpAppCompatActivity implements VideosView {
+public class VideosActivity extends MvpAppCompatActivity implements VideosView, RecyclerToActivity {
 
     //tags
     private static final String NEXT_PAGE_TOKEN_TAG = "next_page_token";
@@ -58,7 +59,7 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView {
     private void initRecycler() {
         mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false));
-        VideoRecyclerAdapter videoRecyclerAdapter = new VideoRecyclerAdapter(mVideos);
+        VideoRecyclerAdapter videoRecyclerAdapter = new VideoRecyclerAdapter(mVideos, this);
         mVideoRecyclerView.setAdapter(videoRecyclerAdapter);
         videoRecyclerAdapter.notifyDataSetChanged();
     }
@@ -87,6 +88,11 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView {
     }
 
     @Override
+    public void openVideo(int position) {
+        mPresenter.openVideo(mVideos.get(position).getIdVideo());
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
@@ -95,13 +101,11 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         switch (id) {
             case R.id.history:
 
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

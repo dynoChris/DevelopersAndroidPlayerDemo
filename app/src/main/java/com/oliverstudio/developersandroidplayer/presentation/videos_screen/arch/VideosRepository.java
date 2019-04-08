@@ -5,8 +5,6 @@ import com.oliverstudio.developersandroidplayer.network.ApiService;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.Item;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.callbacks.BackToPresenterCallback;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.callbacks.PresenterToRepositoryCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +13,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VideosRepository implements PresenterToRepositoryCallback {
+public class VideosRepository {
 
     private ApiService mApiService;
-    private BackToPresenterCallback mBackToPresenterCallback;
+    private BackToPresenter mBackToPresenter;
 
     public VideosRepository(VideosPresenter presenter) {
         mApiService = NetworkUtils.getApiService();
-        mBackToPresenterCallback = presenter;
+        mBackToPresenter = presenter;
     }
 
-    @Override
     public void getVideos(String nextPageToken) {
         Call<ListVideosResponse> call = mApiService.getVideos(
                 NetworkUtils.DEVELOPERS_ANDROID_PLAYLIST,
@@ -40,13 +37,13 @@ public class VideosRepository implements PresenterToRepositoryCallback {
                 if (response.isSuccessful()) {
                     String nextPageToken = response.body().getNextPageToken();
                     List<Video> videos = getListVideos(response.body().getItems());
-                    mBackToPresenterCallback.onSuccess(videos, nextPageToken);
+                    mBackToPresenter.onSuccess(videos, nextPageToken);
                 }
             }
 
             @Override
             public void onFailure(Call<ListVideosResponse> call, Throwable t) {
-                mBackToPresenterCallback.onFailure();
+                mBackToPresenter.onFailure();
             }
         });
     }
@@ -54,10 +51,11 @@ public class VideosRepository implements PresenterToRepositoryCallback {
     private List<Video> getListVideos(List<Item> items) {
         List<Video> videos = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
+            String idVideo = items.get(i).getSnippet().getResourceId().getVideoId();
             String urlImage = items.get(i).getSnippet().getThumbnails().getStandard().getUrl();
             String title = items.get(i).getSnippet().getTitle();
             String timePost = items.get(i).getSnippet().getPublishedAt();
-            videos.add(new Video(urlImage, title, timePost));
+            videos.add(new Video(idVideo, urlImage, title, timePost));
         }
         return videos;
     }

@@ -2,11 +2,13 @@ package com.oliverstudio.developersandroidplayer.data.model;
 
 public class Video {
 
+    private String idVideo;
     private String urlImage;
     private String title;
     private String timePost;
 
-    public Video(String urlImage, String title, String timePost) {
+    public Video(String idVideo, String urlImage, String title, String timePost) {
+        this.idVideo = idVideo;
         this.urlImage = urlImage;
         this.title = title;
         this.timePost = timePost;
@@ -34,5 +36,13 @@ public class Video {
 
     public void setTimePost(String timePost) {
         this.timePost = timePost;
+    }
+
+    public String getIdVideo() {
+        return idVideo;
+    }
+
+    public void setIdVideo(String idVideo) {
+        this.idVideo = idVideo;
     }
 }

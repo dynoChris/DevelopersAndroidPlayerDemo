@@ -10,16 +10,19 @@ import android.widget.TextView;
 
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.presentation.videos_screen.VideosActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdapter.VideoViewHolder> {
 
+    private RecyclerToActivity mCallback;
     private List<Video> mVideos;
 
-    public VideoRecyclerAdapter(List<Video> videos) {
+    public VideoRecyclerAdapter(List<Video> videos, VideosActivity activity) {
         mVideos = videos;
+        mCallback = activity;
     }
 
     @NonNull
@@ -30,13 +33,20 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoRecyclerAdapter.VideoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VideoRecyclerAdapter.VideoViewHolder holder, final int position) {
         Picasso.get()
                 .load(mVideos.get(position).getUrlImage())
                 .placeholder(R.drawable.placeholder_lightgrey_16x9)
                 .into(holder.thumbnailImageView);
         holder.titleTextView.setText(mVideos.get(position).getTitle());
         holder.timePostTextView.setText(mVideos.get(position).getTimePost());
+
+        holder.thumbnailImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallback.openVideo(position);
+            }
+        });
     }
 
     @Override
