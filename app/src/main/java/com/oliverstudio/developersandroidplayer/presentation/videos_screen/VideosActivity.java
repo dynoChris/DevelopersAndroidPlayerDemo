@@ -89,7 +89,7 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
 
     @Override
     public void openVideo(int position) {
-        mPresenter.openVideo(mVideos.get(position).getIdVideo());
+        mPresenter.openVideo(mVideos.get(position).getIdVideo(), this);
     }
 
     @Override

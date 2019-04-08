@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkUtils {
 
-    public static final String API_KEY = "AIzaSyCs_leAFtYjYBJk4_1gDlJ-9dAyxgJYIWw";
+    public static final String API_KEY_YOUTUBE = "AIzaSyCs_leAFtYjYBJk4_1gDlJ-9dAyxgJYIWw";
     public static final String BASE_URL = "https://www.googleapis.com/youtube/v3/";
     public static final String DEVELOPERS_ANDROID_PLAYLIST = "UUVHFbqXqoYvEWM1Ddxl0QDg";
     public static final int RESULTS_PER_PAGE = 25;
