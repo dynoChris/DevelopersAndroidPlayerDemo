@@ -1,5 +1,6 @@
 package com.oliverstudio.developersandroidplayer.presentation.videos_screen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +12,15 @@ import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters.RecyclerToActivity;
 import com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters.VideoRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.VideosPresenter;
 import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.VideosView;
+import com.oliverstudio.developersandroidplayer.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,7 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
     @InjectPresenter
     VideosPresenter mPresenter;
     private List<Video> mVideos = new ArrayList<>();
+    private VideoRecyclerAdapter mVideoRecyclerAdapter;
 
     //rest vars
     private String mNextPageToken = "";
@@ -54,14 +59,25 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
             mPresenter.getVideos(mNextPageToken);
         }
 
+        mVideoRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                boolean isBottomReached = !mVideoRecyclerView.canScrollVertically(Utils.SCROLLING_DOWN);
+                if (isBottomReached) {
+                    mPresenter.getVideos(mNextPageToken);
+                }
+            }
+        });
+
     }
 
     private void initRecycler() {
         mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false));
-        VideoRecyclerAdapter videoRecyclerAdapter = new VideoRecyclerAdapter(mVideos, this);
-        mVideoRecyclerView.setAdapter(videoRecyclerAdapter);
-        videoRecyclerAdapter.notifyDataSetChanged();
+        mVideoRecyclerAdapter = new VideoRecyclerAdapter(mVideos, this);
+        mVideoRecyclerView.setAdapter(mVideoRecyclerAdapter);
+        mVideoRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void initViews() {
@@ -85,11 +101,14 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
     public void inflateVideos(List<Video> videos, String nextPageToken) {
         mNextPageToken = nextPageToken;
         mVideos.addAll(videos);
+        mVideoRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void openVideo(int position) {
-        mPresenter.openVideo(mVideos.get(position).getIdVideo(), this);
+        Intent intent = YouTubeStandalonePlayer.createVideoIntent(this,
+                NetworkUtils.API_KEY_YOUTUBE, mVideos.get(position).getIdVideo());
+        startActivity(intent);
     }
 
     @Override

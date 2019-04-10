@@ -5,6 +5,7 @@ import com.oliverstudio.developersandroidplayer.network.ApiService;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.Item;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
+import com.oliverstudio.developersandroidplayer.network.response.list_videos.Thumbnails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +53,28 @@ public class VideosRepository {
         List<Video> videos = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
             String idVideo = items.get(i).getSnippet().getResourceId().getVideoId();
-            String urlImage = items.get(i).getSnippet().getThumbnails().getStandard().getUrl();
+            String urlImage = getUrlPicture(items.get(i).getSnippet().getThumbnails());
             String title = items.get(i).getSnippet().getTitle();
             String timePost = items.get(i).getSnippet().getPublishedAt();
             videos.add(new Video(idVideo, urlImage, title, timePost));
         }
         return videos;
+    }
+
+    private String getUrlPicture(Thumbnails thumbnails) {
+
+//        if (thumbnails.getMaxres() != null) {
+//            return thumbnails.getMaxres().getUrl();
+//        }
+        if (thumbnails.getStandard() != null) {
+            return thumbnails.getStandard().getUrl();
+        }
+        if (thumbnails.getHigh() != null) {
+            return thumbnails.getHigh().getUrl();
+        }
+        if (thumbnails.getMedium() != null) {
+            return thumbnails.getMedium().getUrl();
+        }
+        return "";
     }
 }
