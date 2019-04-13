@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.videos_screen;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +16,10 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters.RecyclerToActivity;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters.VideoRecyclerAdapter;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.VideosPresenter;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch.VideosView;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.adapters.RecyclerToActivity;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.adapters.VideoRecyclerAdapter;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.arch.VideosPresenter;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.arch.VideosView;
 import com.oliverstudio.developersandroidplayer.utils.Utils;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
         initRecycler();
 
         if (savedInstanceState == null) {
-            mPresenter.getVideos(mNextPageToken);
+            mPresenter.getVideos();
         }
 
         mVideoRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

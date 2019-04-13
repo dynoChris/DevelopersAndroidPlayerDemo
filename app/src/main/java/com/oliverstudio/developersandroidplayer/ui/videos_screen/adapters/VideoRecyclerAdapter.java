@@ -1,7 +1,8 @@
-package com.oliverstudio.developersandroidplayer.presentation.videos_screen.adapters;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,16 @@ import android.widget.TextView;
 
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
-import com.oliverstudio.developersandroidplayer.presentation.videos_screen.VideosActivity;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.VideosActivity;
+import com.oliverstudio.developersandroidplayer.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdapter.VideoViewHolder> {
+
+    public static final int VIEW_TYPE_ITEM = 0;
+    public static final int VIEW_TYPE_LOADING = 1;
 
     private RecyclerToActivity mCallback;
     private List<Video> mVideos;
@@ -25,9 +30,17 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
         mCallback = activity;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return mVideos.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+    }
+
     @NonNull
     @Override
     public VideoRecyclerAdapter.VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == 1) {
+            Log.d(Utils.TAG, "onCreateViewHolder: ");
+        }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_item, parent, false);
         return new VideoViewHolder(view);
     }

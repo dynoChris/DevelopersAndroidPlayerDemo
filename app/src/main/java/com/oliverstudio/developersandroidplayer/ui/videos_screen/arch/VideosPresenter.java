@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen.arch;
 
 import android.util.Log;
 
@@ -18,8 +18,11 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
         mRepository = new VideosRepository(this);
     }
 
+    public void getVideos() {
+        mRepository.getVideos();
+    }
+
     public void getVideos(String nextPageToken) {
-//        getViewState().showProgressBar();
         mRepository.getVideos(nextPageToken);
     }
 
@@ -32,6 +35,5 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
     @Override
     public void onFailure() {
         getViewState().hideProgressBar();
-        Log.d(Utils.TAG, "onSuccess: ");
     }
 }

@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.videos_screen.arch;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen.arch;
 
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiService;
@@ -22,6 +22,31 @@ public class VideosRepository {
     public VideosRepository(VideosPresenter presenter) {
         mApiService = NetworkUtils.getApiService();
         mBackToPresenter = presenter;
+    }
+
+    public void getVideos() {
+        Call<ListVideosResponse> call = mApiService.getVideos(
+                NetworkUtils.DEVELOPERS_ANDROID_PLAYLIST,
+                "",
+                NetworkUtils.RESULTS_PER_PAGE,
+                NetworkUtils.INCLUDE_SNIPPET,
+                NetworkUtils.API_KEY_YOUTUBE);
+
+        call.enqueue(new Callback<ListVideosResponse>() {
+            @Override
+            public void onResponse(Call<ListVideosResponse> call, Response<ListVideosResponse> response) {
+                if (response.isSuccessful()) {
+                    String nextPageToken = response.body().getNextPageToken();
+                    List<Video> videos = getListVideos(response.body().getItems());
+                    mBackToPresenter.onSuccess(videos, nextPageToken);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ListVideosResponse> call, Throwable t) {
+                mBackToPresenter.onFailure();
+            }
+        });
     }
 
     public void getVideos(String nextPageToken) {
