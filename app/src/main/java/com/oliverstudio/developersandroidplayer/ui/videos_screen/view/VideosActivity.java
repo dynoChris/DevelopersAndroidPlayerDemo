@@ -1,4 +1,5 @@
-package com.oliverstudio.developersandroidplayer.ui.videos_screen;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen.view;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,19 +17,15 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
-import com.oliverstudio.developersandroidplayer.ui.videos_screen.adapters.RecyclerToActivity;
-import com.oliverstudio.developersandroidplayer.ui.videos_screen.adapters.VideoRecyclerAdapter;
-import com.oliverstudio.developersandroidplayer.ui.videos_screen.arch.VideosPresenter;
-import com.oliverstudio.developersandroidplayer.ui.videos_screen.arch.VideosView;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.presenter.VideosPresenter;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.adapters.RecyclerToActivity;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.adapters.VideoRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VideosActivity extends MvpAppCompatActivity implements VideosView, RecyclerToActivity {
-
-    //tags
-    private static final String NEXT_PAGE_TOKEN_TAG = "next_page_token";
 
     //views
     private Toolbar mToolbar;
@@ -38,11 +35,12 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
     //general vars
     @InjectPresenter
     VideosPresenter mPresenter;
-    private List<Video> mVideos = new ArrayList<>();
+    private List<Video> mVideoList = new ArrayList<>();
     private VideoRecyclerAdapter mVideoRecyclerAdapter;
 
     //rest vars
     private String mNextPageToken = "";
+    private boolean mIsLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +62,7 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 boolean isBottomReached = !mVideoRecyclerView.canScrollVertically(Utils.SCROLLING_DOWN);
-                if (isBottomReached) {
+                if (isBottomReached && !mIsLoading) {
                     mPresenter.getVideos(mNextPageToken);
                 }
             }
@@ -75,7 +73,7 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
     private void initRecycler() {
         mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false));
-        mVideoRecyclerAdapter = new VideoRecyclerAdapter(mVideos, this);
+        mVideoRecyclerAdapter = new VideoRecyclerAdapter(mVideoList, this);
         mVideoRecyclerView.setAdapter(mVideoRecyclerAdapter);
         mVideoRecyclerAdapter.notifyDataSetChanged();
     }
@@ -98,16 +96,37 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
     }
 
     @Override
+    public void showFooter() {
+        mIsLoading = true;
+        mVideoList.add(null);
+        mVideoRecyclerAdapter.notifyDataSetChanged();
+        mVideoRecyclerView.scrollToPosition(mVideoList.size()-1);
+    }
+
+    @Override
+    public void hideFooter() {
+        mIsLoading = false;
+        try {
+            int lastIndex = mVideoList.size()-1;
+            if (mVideoList.get(lastIndex) == null) {
+                mVideoList.remove(lastIndex);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            //do nothing
+        }
+    }
+
+    @Override
     public void inflateVideos(List<Video> videos, String nextPageToken) {
         mNextPageToken = nextPageToken;
-        mVideos.addAll(videos);
+        mVideoList.addAll(videos);
         mVideoRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void openVideo(int position) {
         Intent intent = YouTubeStandalonePlayer.createVideoIntent(this,
-                NetworkUtils.API_KEY_YOUTUBE, mVideos.get(position).getIdVideo());
+                NetworkUtils.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
         startActivity(intent);
     }
 

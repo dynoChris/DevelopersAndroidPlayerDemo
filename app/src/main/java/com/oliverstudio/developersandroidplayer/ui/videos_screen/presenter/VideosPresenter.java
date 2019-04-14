@@ -1,11 +1,11 @@
-package com.oliverstudio.developersandroidplayer.ui.videos_screen.arch;
-
-import android.util.Log;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
-import com.oliverstudio.developersandroidplayer.utils.Utils;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.repository.BackToPresenter;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.repository.VideosRepository;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.VideosView;
 
 import java.util.List;
 
@@ -23,12 +23,14 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
     }
 
     public void getVideos(String nextPageToken) {
+        getViewState().showFooter();
         mRepository.getVideos(nextPageToken);
     }
 
     @Override
     public void onSuccess(List<Video> videos, String nextPageToken) {
         getViewState().hideProgressBar();
+        getViewState().hideFooter();
         getViewState().inflateVideos(videos, nextPageToken);
     }
 

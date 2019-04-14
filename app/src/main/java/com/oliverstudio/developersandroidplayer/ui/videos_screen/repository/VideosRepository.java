@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.videos_screen.arch;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen.repository;
 
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiService;
@@ -6,6 +6,7 @@ import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.Item;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.Thumbnails;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.presenter.VideosPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

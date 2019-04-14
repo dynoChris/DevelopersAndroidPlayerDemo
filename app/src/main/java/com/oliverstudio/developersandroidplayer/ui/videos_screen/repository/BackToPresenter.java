@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.videos_screen.arch;
+package com.oliverstudio.developersandroidplayer.ui.videos_screen.repository;
 
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 
