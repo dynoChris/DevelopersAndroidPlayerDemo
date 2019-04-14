@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.videos_screen.view.VideosActivity">
+        <activity android:name=".ui.home_screen.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

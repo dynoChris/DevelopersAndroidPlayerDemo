@@ -18,7 +18,6 @@ public class NetworkUtils {
     public static final int RESULTS_PER_PAGE = 25;
     public static final String INCLUDE_SNIPPET = "snippet";
 
-
     public static ApiService getApiService() {
 
         Gson gson = new GsonBuilder()

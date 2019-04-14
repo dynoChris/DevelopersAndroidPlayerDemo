@@ -1,34 +1,33 @@
 package com.oliverstudio.developersandroidplayer.ui.videos_screen.view;
 
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.ui.videos_screen.presenter.VideosPresenter;
-import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.adapters.RecyclerToActivity;
+import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.adapters.RecyclerToFragment;
 import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.adapters.VideoRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideosActivity extends MvpAppCompatActivity implements VideosView, RecyclerToActivity {
+public class VideosFragment extends MvpAppCompatFragment implements VideosView, RecyclerToFragment {
 
     //views
-    private Toolbar mToolbar;
     private RecyclerView mVideoRecyclerView;
     private ProgressBar mProgressBar;
 
@@ -38,18 +37,29 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
     private List<Video> mVideoList = new ArrayList<>();
     private VideoRecyclerAdapter mVideoRecyclerAdapter;
 
-    //rest vars
+    //vars
     private String mNextPageToken = "";
     private boolean mIsLoading = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_videos);
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        setRetainInstance(true);
+    }
 
-        initViews();
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_videos, container, false);
+        initViews(view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initViews(view);
 
         initRecycler();
 
@@ -67,20 +77,19 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
                 }
             }
         });
+    }
 
+    private void initViews(View view) {
+        mVideoRecyclerView = view.findViewById(R.id.recycler_view);
+        mProgressBar = view.findViewById(R.id.progress_bar);
     }
 
     private void initRecycler() {
-        mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+        mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
         mVideoRecyclerAdapter = new VideoRecyclerAdapter(mVideoList, this);
         mVideoRecyclerView.setAdapter(mVideoRecyclerAdapter);
         mVideoRecyclerAdapter.notifyDataSetChanged();
-    }
-
-    private void initViews() {
-        mVideoRecyclerView = findViewById(R.id.recycler_view);
-        mProgressBar = findViewById(R.id.progress_bar);
     }
 
     @Override
@@ -125,25 +134,8 @@ public class VideosActivity extends MvpAppCompatActivity implements VideosView, 
 
     @Override
     public void openVideo(int position) {
-        Intent intent = YouTubeStandalonePlayer.createVideoIntent(this,
+        Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(),
                 NetworkUtils.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.history:
-
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
