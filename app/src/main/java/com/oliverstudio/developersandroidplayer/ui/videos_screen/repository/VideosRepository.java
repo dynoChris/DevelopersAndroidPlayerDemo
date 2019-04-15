@@ -20,9 +20,9 @@ import retrofit2.Response;
 
 public class VideosRepository {
 
+    private BackToPresenter mBackToPresenter;
     private ApiYoutube mApiService;
     private VideoDatabase mVideoDatabase;
-    private BackToPresenter mBackToPresenter;
 
     public VideosRepository(VideosPresenter presenter) {
         mApiService = NetworkUtils.getApiService();

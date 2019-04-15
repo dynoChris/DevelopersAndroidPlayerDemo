@@ -63,8 +63,6 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initViews(view);
-
         initRecycler();
 
         if (savedInstanceState == null) {
@@ -83,14 +81,6 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
                 }
             }
         });
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState == null) {
-            Log.d(Utils.TAG, "onActivityCreated: ");
-        }
     }
 
     private void initViews(View view) {

@@ -7,8 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.oliverstudio.developersandroidplayer.R;
+import com.oliverstudio.developersandroidplayer.ui.history_screen.view.HistoryFragment;
 import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.VideosFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -17,21 +17,23 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar mToolbar;
 
     //general vars
-    private Fragment mFragment;
+    private VideosFragment mVideosFragment;
+    private HistoryFragment mHistoryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_videos);
+        setContentView(R.layout.activity_home);
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        mFragment = getSupportFragmentManager().findFragmentByTag(VideosFragment.FRAGMENT_TAG);
+        mVideosFragment = (VideosFragment) getSupportFragmentManager().findFragmentByTag(VideosFragment.FRAGMENT_TAG);
+        mHistoryFragment = (HistoryFragment) getSupportFragmentManager().findFragmentByTag(HistoryFragment.FRAGMENT_TAG);
 
-        if (mFragment == null) {
+        if (mVideosFragment == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new VideosFragment(), VideosFragment.FRAGMENT_TAG)
+                    .add(R.id.fragment_container, new VideosFragment(), VideosFragment.FRAGMENT_TAG)
                     .commit();
         }
 
@@ -48,6 +50,15 @@ public class HomeActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.history:
+                if (mHistoryFragment == null) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, new HistoryFragment())
+                            .addToBackStack(HistoryFragment.FRAGMENT_TAG)
+                            .commit();
+                }
+
+                mToolbar.setTitle(R.string.history);
 
                 return true;
         }

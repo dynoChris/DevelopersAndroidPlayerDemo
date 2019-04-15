@@ -22,8 +22,8 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public static final int VIEW_TYPE_ITEM = 0;
     public static final int VIEW_TYPE_PROGRESS = 1;
 
-    private RecyclerToFragment mCallback;
     private List<Video> mVideoList;
+    private RecyclerToFragment mCallback;
 
     public VideoRecyclerAdapter(List<Video> videoList, VideosFragment fragment) {
         mVideoList = videoList;
