@@ -1,6 +1,7 @@
 package com.oliverstudio.developersandroidplayer.ui.videos_screen.view.adapters;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +58,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     .into(videoHolder.thumbnailImageView);
             videoHolder.titleTextView.setText(mVideoList.get(position).getTitle());
             videoHolder.timePostTextView.setText(mVideoList.get(position).getTimePost());
-            videoHolder.thumbnailImageView.setOnClickListener(new View.OnClickListener() {
+            videoHolder.parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mCallback.openVideo(holder.getAdapterPosition());
@@ -77,6 +78,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 class VideoViewHolder extends RecyclerView.ViewHolder {
 
+    ConstraintLayout parent;
     ImageView thumbnailImageView;
     TextView titleTextView;
     TextView timePostTextView;
@@ -84,6 +86,7 @@ class VideoViewHolder extends RecyclerView.ViewHolder {
     VideoViewHolder(@NonNull View itemView) {
         super(itemView);
 
+        parent = itemView.findViewById(R.id.video_container);
         thumbnailImageView = itemView.findViewById(R.id.thumbnail_iv);
         titleTextView = itemView.findViewById(R.id.title_iv);
         timePostTextView = itemView.findViewById(R.id.time_post_tv);

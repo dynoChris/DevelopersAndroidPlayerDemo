@@ -1,6 +1,7 @@
 package com.oliverstudio.developersandroidplayer.ui.home_screen;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,7 +13,11 @@ import com.oliverstudio.developersandroidplayer.ui.videos_screen.view.VideosFrag
 
 public class HomeActivity extends AppCompatActivity {
 
+    //view
     private Toolbar mToolbar;
+
+    //general vars
+    private Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +26,15 @@ public class HomeActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new VideosFragment())
-                .commit();
+        mFragment = getSupportFragmentManager().findFragmentByTag(VideosFragment.FRAGMENT_TAG);
+
+        if (mFragment == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new VideosFragment(), VideosFragment.FRAGMENT_TAG)
+                    .commit();
+        }
+
     }
 
     @Override

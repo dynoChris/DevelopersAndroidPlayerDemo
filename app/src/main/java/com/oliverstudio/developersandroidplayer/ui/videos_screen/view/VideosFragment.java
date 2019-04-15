@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VideosFragment extends MvpAppCompatFragment implements VideosView, RecyclerToFragment {
+
+    //tags
+    public static final String FRAGMENT_TAG = "fragment_videos";
 
     //views
     private RecyclerView mVideoRecyclerView;
@@ -65,6 +69,8 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
 
         if (savedInstanceState == null) {
             mPresenter.getVideos();
+        } else {
+            hideProgressBar();
         }
 
         mVideoRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -77,6 +83,14 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState == null) {
+            Log.d(Utils.TAG, "onActivityCreated: ");
+        }
     }
 
     private void initViews(View view) {
