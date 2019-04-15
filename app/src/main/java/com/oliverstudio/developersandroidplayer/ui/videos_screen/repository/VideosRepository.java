@@ -1,5 +1,8 @@
 package com.oliverstudio.developersandroidplayer.ui.videos_screen.repository;
 
+import com.oliverstudio.developersandroidplayer.App;
+import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
+import com.oliverstudio.developersandroidplayer.data.db.VideoEntity;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
@@ -18,10 +21,12 @@ import retrofit2.Response;
 public class VideosRepository {
 
     private ApiYoutube mApiService;
+    private VideoDatabase mVideoDatabase;
     private BackToPresenter mBackToPresenter;
 
     public VideosRepository(VideosPresenter presenter) {
         mApiService = NetworkUtils.getApiService();
+        mVideoDatabase = App.getInstance().getDatabase();
         mBackToPresenter = presenter;
     }
 
@@ -102,5 +107,21 @@ public class VideosRepository {
             return thumbnails.getMedium().getUrl();
         }
         return "";
+    }
+
+    public void insertVideo(Video video) {
+        String idVideo = video.getIdVideo();
+        String urlImage = video.getUrlImage();
+        String title = video.getTitle();
+        String timePost = video.getTimePost();
+
+        final VideoEntity videoEntity = new VideoEntity(idVideo, urlImage, title, timePost);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mVideoDatabase.daoAccess().insertVideo(videoEntity);
+            }
+        }).start();
     }
 }

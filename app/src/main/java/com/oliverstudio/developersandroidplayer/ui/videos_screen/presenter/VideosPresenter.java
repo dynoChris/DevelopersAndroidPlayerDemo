@@ -38,4 +38,8 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
     public void onFailure() {
         getViewState().hideProgressBar();
     }
+
+    public void insertVideo(Video video) {
+        mRepository.insertVideo(video);
+    }
 }
