@@ -1,5 +1,6 @@
 package com.oliverstudio.developersandroidplayer.ui.videos_screen.view;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,9 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
+import com.oliverstudio.developersandroidplayer.data.db.StorageUtils;
+import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
+import com.oliverstudio.developersandroidplayer.data.db.VideoEntity;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.ui.videos_screen.presenter.VideosPresenter;
@@ -38,6 +42,7 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
     //general vars
     @InjectPresenter
     VideosPresenter mPresenter;
+    private VideoDatabase mVideoDatabase;
     private List<Video> mVideoList = new ArrayList<>();
     private VideoRecyclerAdapter mVideoRecyclerAdapter;
 
@@ -66,6 +71,9 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
         initViews(view);
 
         initRecycler();
+
+        mVideoDatabase = Room.databaseBuilder(getContext(), VideoDatabase.class, StorageUtils.DATABASE_NAME)
+                .build();
 
         if (savedInstanceState == null) {
             mPresenter.getVideos();
@@ -144,6 +152,24 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
         mNextPageToken = nextPageToken;
         mVideoList.addAll(videos);
         mVideoRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void insertVideoToDB(Video video) {
+        String idVideo = video.getIdVideo();
+        String urlImage = video.getUrlImage();
+        String title = video.getTitle();
+        String timePost = video.getTimePost();
+
+        final VideoEntity videoEntity = new VideoEntity(idVideo, urlImage, title, timePost);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mVideoDatabase.daoAccess().insertVideo(videoEntity);
+            }
+        }).start();
+
     }
 
     @Override

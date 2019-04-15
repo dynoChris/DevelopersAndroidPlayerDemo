@@ -1,7 +1,7 @@
 package com.oliverstudio.developersandroidplayer.ui.videos_screen.repository;
 
 import com.oliverstudio.developersandroidplayer.data.model.Video;
-import com.oliverstudio.developersandroidplayer.network.ApiService;
+import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.Item;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class VideosRepository {
 
-    private ApiService mApiService;
+    private ApiYoutube mApiService;
     private BackToPresenter mBackToPresenter;
 
     public VideosRepository(VideosPresenter presenter) {

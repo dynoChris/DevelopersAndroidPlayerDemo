@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface ApiService {
+public interface ApiYoutube {
 
     //https://www.googleapis.com/youtube/v3/playlistItems
     // ?playlistId=UUVHFbqXqoYvEWM1Ddxl0QDg

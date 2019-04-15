@@ -61,6 +61,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             videoHolder.parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mCallback.insertVideoToDB(mVideoList.get(holder.getAdapterPosition()));
                     mCallback.openVideo(holder.getAdapterPosition());
                 }
             });

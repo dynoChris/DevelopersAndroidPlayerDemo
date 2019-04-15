@@ -18,7 +18,7 @@ public class NetworkUtils {
     public static final int RESULTS_PER_PAGE = 25;
     public static final String INCLUDE_SNIPPET = "snippet";
 
-    public static ApiService getApiService() {
+    public static ApiYoutube getApiService() {
 
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
@@ -33,7 +33,7 @@ public class NetworkUtils {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        return retrofit.create(ApiService.class);
+        return retrofit.create(ApiYoutube.class);
     }
 
     private static class CustomFieldNamingPolicy implements FieldNamingStrategy {
@@ -45,7 +45,7 @@ public class NetworkUtils {
         }
     }
 
-//    public static ApiService getApiService() {
+//    public static ApiYoutube getApiService() {
 //
 //        Gson gson = new GsonBuilder()
 //                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -56,7 +56,7 @@ public class NetworkUtils {
 //                .addConverterFactory(GsonConverterFactory.create(gson))
 //                .build();
 //
-//        return retrofit.create(ApiService.class);
+//        return retrofit.create(ApiYoutube.class);
 //    }
 
 }

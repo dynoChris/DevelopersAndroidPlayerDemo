@@ -7,17 +7,13 @@ import com.oliverstudio.developersandroidplayer.data.model.Video;
 
 import java.util.List;
 
+@StateStrategyType(SkipStrategy.class)
 public interface VideosView extends MvpView {
 
-    @StateStrategyType(SkipStrategy.class)
     void showProgressBar();
-    @StateStrategyType(SkipStrategy.class)
     void hideProgressBar();
-    @StateStrategyType(SkipStrategy.class)
     void showFooter();
-    @StateStrategyType(SkipStrategy.class)
     void hideFooter();
-    @StateStrategyType(SkipStrategy.class)
     void inflateVideos(List<Video> videos, String nextPageToken);
 
 }
