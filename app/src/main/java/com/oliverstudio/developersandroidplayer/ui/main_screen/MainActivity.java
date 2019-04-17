@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
         //init views
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        mBottomNavigationView.setSelectedItemId(R.id.nav_history);
+        mBottomNavigationView.setSelectedItemId(R.id.nav_videos);
         mBottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new HistoryFragment(), HistoryFragment.FRAGMENT_TAG)
+                    .replace(R.id.fragment_container, new VideosFragment(), VideosFragment.FRAGMENT_TAG)
                     .commit();
         }
 

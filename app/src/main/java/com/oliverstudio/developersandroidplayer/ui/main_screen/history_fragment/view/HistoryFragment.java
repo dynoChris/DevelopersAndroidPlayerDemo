@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -32,6 +33,7 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
     //views
     private ProgressBar mProgressBar;
     private RecyclerView mHistoryRecyclerView;
+    private TextView mHavntHistoryTextView;
 
     //general vars
     @InjectPresenter
@@ -70,6 +72,7 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
     private void initViews(View view) {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mHistoryRecyclerView = view.findViewById(R.id.recycler_view);
+        mHavntHistoryTextView = view.findViewById(R.id.havnt_history_tv);
     }
 
     private void initRecycler() {
@@ -84,12 +87,21 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
     public void showProgressBar() {
         mProgressBar.setVisibility(View.VISIBLE);
         mHistoryRecyclerView.setVisibility(View.GONE);
+        mHavntHistoryTextView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
         mHistoryRecyclerView.setVisibility(View.VISIBLE);
+        mHavntHistoryTextView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showHaventElementsText() {
+        mHavntHistoryTextView.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
+        mHistoryRecyclerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -97,6 +109,7 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
         mVideoList.clear();
         mVideoList.addAll(videoList);
         mHistoryRecyclerAdapter.notifyDataSetChanged();
+        if (videoList.size() == 0) mPresenter.showHaventElementsText();
     }
 
     @Override

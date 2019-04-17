@@ -27,4 +27,8 @@ public class HistoryPresenter extends MvpPresenter<HistoryView> implements BackT
         getViewState().hideProgressBar();
         getViewState().inflateHistory(videoList);
     }
+
+    public void showHaventElementsText() {
+        getViewState().showHaventElementsText();
+    }
 }

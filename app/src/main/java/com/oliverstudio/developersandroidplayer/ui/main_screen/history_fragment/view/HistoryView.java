@@ -12,4 +12,5 @@ public interface HistoryView extends MvpView {
     void showProgressBar();
     void hideProgressBar();
     void inflateHistory(List<Video> videoList);
+    void showHaventElementsText();
 }
