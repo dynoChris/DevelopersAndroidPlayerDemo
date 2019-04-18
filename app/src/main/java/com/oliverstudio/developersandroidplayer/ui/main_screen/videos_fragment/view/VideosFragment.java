@@ -16,6 +16,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.presenter.VideosPresenter;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.RecyclerToFragment;
@@ -143,7 +144,7 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
     @Override
     public void openVideo(int position) {
         Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(),
-                NetworkUtils.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
+                ApiYoutube.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
         startActivity(intent);
     }
 }

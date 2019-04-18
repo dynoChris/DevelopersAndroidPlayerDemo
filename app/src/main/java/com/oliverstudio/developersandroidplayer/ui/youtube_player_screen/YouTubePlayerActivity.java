@@ -8,6 +8,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.oliverstudio.developersandroidplayer.R;
+import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 
 
@@ -19,7 +20,7 @@ public class YouTubePlayerActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_youtube_player);
 
         final YouTubePlayerView player = findViewById(R.id.youtube_player);
-        player.initialize(NetworkUtils.API_KEY_YOUTUBE, new YouTubePlayer.OnInitializedListener() {
+        player.initialize(ApiYoutube.API_KEY_YOUTUBE, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
                 if(!wasRestored) {

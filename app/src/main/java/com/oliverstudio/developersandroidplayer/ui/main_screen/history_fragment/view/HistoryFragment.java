@@ -17,6 +17,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.presenter.HistoryPresenter;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.HistoryRecyclerAdapter;
@@ -115,7 +116,7 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
     @Override
     public void openVideo(int position) {
         Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(),
-                NetworkUtils.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
+                ApiYoutube.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
         startActivity(intent);
     }
 }

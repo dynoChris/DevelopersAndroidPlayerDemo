@@ -32,11 +32,11 @@ public class VideosRepository {
 
     public void getVideos() {
         Call<ListVideosResponse> call = mApiService.getVideos(
-                NetworkUtils.DEVELOPERS_ANDROID_PLAYLIST,
+                ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
                 "",
-                NetworkUtils.RESULTS_PER_PAGE,
-                NetworkUtils.INCLUDE_SNIPPET,
-                NetworkUtils.API_KEY_YOUTUBE);
+                ApiYoutube.RESULTS_PER_PAGE,
+                ApiYoutube.INCLUDE_SNIPPET,
+                ApiYoutube.API_KEY_YOUTUBE);
 
         call.enqueue(new Callback<ListVideosResponse>() {
             @Override
@@ -57,11 +57,11 @@ public class VideosRepository {
 
     public void getVideos(String nextPageToken) {
         Call<ListVideosResponse> call = mApiService.getVideos(
-                NetworkUtils.DEVELOPERS_ANDROID_PLAYLIST,
+                ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
                 nextPageToken,
-                NetworkUtils.RESULTS_PER_PAGE,
-                NetworkUtils.INCLUDE_SNIPPET,
-                NetworkUtils.API_KEY_YOUTUBE);
+                ApiYoutube.RESULTS_PER_PAGE,
+                ApiYoutube.INCLUDE_SNIPPET,
+                ApiYoutube.API_KEY_YOUTUBE);
 
         call.enqueue(new Callback<ListVideosResponse>() {
             @Override
