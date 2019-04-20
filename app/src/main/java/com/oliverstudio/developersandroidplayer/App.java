@@ -1,30 +1,27 @@
 package com.oliverstudio.developersandroidplayer;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 
-import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
+import com.oliverstudio.developersandroidplayer.di.AppComponent;
+import com.oliverstudio.developersandroidplayer.di.DaggerAppComponent;
+import com.oliverstudio.developersandroidplayer.di.modules.ContextModule;
 
 public class App extends Application {
 
-    private static App instance;
-    private VideoDatabase database;
+    private static AppComponent sAppComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        database = Room.databaseBuilder(this, VideoDatabase.class, VideoDatabase.DATABASE_NAME)
-                .allowMainThreadQueries()
+
+        sAppComponent = DaggerAppComponent.builder()
+                .contextModule(new ContextModule(this))
                 .build();
+
     }
 
-    public static App getInstance() {
-        return instance;
-    }
-
-    public VideoDatabase getDatabase() {
-        return database;
+    public static AppComponent getAppComponent() {
+        return sAppComponent;
     }
 
 }

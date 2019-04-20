@@ -1,11 +1,10 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.repository;
+package com.oliverstudio.developersandroidplayer.domain.videos_fragment;
 
 import com.oliverstudio.developersandroidplayer.App;
 import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
 import com.oliverstudio.developersandroidplayer.data.db.VideoEntity;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
-import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.Item;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.Thumbnails;
@@ -14,19 +13,22 @@ import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.p
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class VideosRepository {
 
+    @Inject
+    ApiYoutube mApiService;
+    @Inject
+    VideoDatabase mDatabase;
     private BackToPresenter mBackToPresenter;
-    private ApiYoutube mApiService;
-    private VideoDatabase mVideoDatabase;
 
     public VideosRepository(VideosPresenter presenter) {
-        mApiService = NetworkUtils.getApiService();
-        mVideoDatabase = App.getInstance().getDatabase();
+        App.getAppComponent().inject(this);
         mBackToPresenter = presenter;
     }
 
@@ -120,7 +122,7 @@ public class VideosRepository {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mVideoDatabase.daoAccess().insertVideo(videoEntity);
+                mDatabase.daoAccess().insertVideo(videoEntity);
             }
         }).start();
     }

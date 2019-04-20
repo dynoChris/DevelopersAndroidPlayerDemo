@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.repository;
+package com.oliverstudio.developersandroidplayer.domain.history_fragment;
 
 import com.oliverstudio.developersandroidplayer.App;
 import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
@@ -9,18 +9,21 @@ import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class HistoryRepository {
 
+    @Inject
+    VideoDatabase mDatabase;
     private BackToPresenter mBackToPresenter;
-    private VideoDatabase mVideoDatabase;
 
     public HistoryRepository(HistoryPresenter presenter) {
+        App.getAppComponent().inject(this);
         mBackToPresenter = presenter;
-        mVideoDatabase = App.getInstance().getDatabase();
     }
 
     public void getHistoryWatchedFromDB() {
-        List<VideoEntity> videoEntityList = mVideoDatabase.daoAccess().fetchAllVideos();
+        List<VideoEntity> videoEntityList = mDatabase.daoAccess().fetchAllVideos();
         List<Video> videoList = new ArrayList<>();
         for (int i = 0; i < videoEntityList.size(); i++) {
             String idVideo = videoEntityList.get(i).getIdVideo();

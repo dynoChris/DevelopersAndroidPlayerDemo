@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.repository;
+package com.oliverstudio.developersandroidplayer.domain.history_fragment;
 
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 

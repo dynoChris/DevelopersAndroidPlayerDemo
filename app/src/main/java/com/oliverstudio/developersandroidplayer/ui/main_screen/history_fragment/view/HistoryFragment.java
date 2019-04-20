@@ -18,7 +18,6 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
-import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.presenter.HistoryPresenter;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.HistoryRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.RecyclerToFragment;

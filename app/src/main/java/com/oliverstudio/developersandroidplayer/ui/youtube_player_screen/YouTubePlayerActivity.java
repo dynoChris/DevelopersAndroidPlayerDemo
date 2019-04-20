@@ -9,8 +9,6 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
-import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
-
 
 public class YouTubePlayerActivity extends YouTubeBaseActivity {
 

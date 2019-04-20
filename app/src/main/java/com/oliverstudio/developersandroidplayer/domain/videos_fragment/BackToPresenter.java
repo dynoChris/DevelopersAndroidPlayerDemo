@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.repository;
+package com.oliverstudio.developersandroidplayer.domain.videos_fragment;
 
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 

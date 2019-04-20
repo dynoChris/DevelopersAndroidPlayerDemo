@@ -17,7 +17,6 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
-import com.oliverstudio.developersandroidplayer.network.NetworkUtils;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.presenter.VideosPresenter;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.RecyclerToFragment;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.VideoRecyclerAdapter;
@@ -113,14 +112,14 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
         mIsLoading = true;
         mVideoList.add(null);
         mVideoRecyclerAdapter.notifyDataSetChanged();
-        mVideoRecyclerView.scrollToPosition(mVideoList.size()-1);
+        mVideoRecyclerView.scrollToPosition(mVideoList.size() - 1);
     }
 
     @Override
     public void hideFooter() {
         mIsLoading = false;
         try {
-            int lastIndex = mVideoList.size()-1;
+            int lastIndex = mVideoList.size() - 1;
             if (mVideoList.get(lastIndex) == null) {
                 mVideoList.remove(lastIndex);
             }
