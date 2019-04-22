@@ -7,6 +7,6 @@ import java.util.List;
 public interface BackToPresenter {
 
     void onSuccess(List<Video> videos, String nextPageToken);
-    void onFailure();
+    void onFailure(String message);
 
 }

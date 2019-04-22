@@ -19,7 +19,7 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
     }
 
     public void getVideos() {
-        mRepository.getVideos();
+        mRepository.getVideos("");//TODO try do not duplicate you code
     }
 
     public void getVideos(String nextPageToken) {
@@ -35,7 +35,7 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(String message) {
         getViewState().hideProgressBar();
     }
 
