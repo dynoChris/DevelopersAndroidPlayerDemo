@@ -1,6 +1,7 @@
 package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -144,8 +145,12 @@ public class VideosFragment extends MvpAppCompatFragment implements VideosView, 
 
     @Override
     public void openVideo(int position) {
-        Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(),
-                ApiYoutube.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
-        startActivity(intent);
+        try {
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(),
+                    ApiYoutube.API_KEY_YOUTUBE, mVideoList.get(position).getIdVideo());
+            startActivity(intent);
+        } catch (Exception ex) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.youtube")));
+        }
     }
 }
