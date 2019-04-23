@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.HistoryFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,11 +18,11 @@ import java.util.List;
 public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecyclerAdapter.HistoryViewHolder> {
 
     private List<Video> mVideoList;
-    private RecyclerToFragment mCallback;
+    private AdapterCallback mCallback;
 
-    public HistoryRecyclerAdapter(List<Video> videoList, HistoryFragment fragment) {
+    public HistoryRecyclerAdapter(List<Video> videoList, AdapterCallback callback) {
         mVideoList = videoList;
-        mCallback = fragment;
+        mCallback = callback;
     }
 
     @NonNull

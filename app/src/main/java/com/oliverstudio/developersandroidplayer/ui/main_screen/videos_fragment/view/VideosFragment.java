@@ -19,14 +19,14 @@ import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.presenter.VideosPresenter;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.RecyclerToFragment;
+import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.AdapterCallback;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.VideoRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideosFragment extends MvpAppCompatFragment implements VideosView, RecyclerToFragment {
+public class VideosFragment extends MvpAppCompatFragment implements VideosView, AdapterCallback {
 
     //tags
     public static final String FRAGMENT_TAG = "fragment_videos";

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.VideosFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,11 +22,11 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public static final int VIEW_TYPE_PROGRESS = 1;
 
     private List<Video> mVideoList;
-    private RecyclerToFragment mCallback;
+    private AdapterCallback mCallback;
 
-    public VideoRecyclerAdapter(List<Video> videoList, VideosFragment fragment) {
+    public VideoRecyclerAdapter(List<Video> videoList, AdapterCallback callback) {
         mVideoList = videoList;
-        mCallback = fragment;
+        mCallback = callback;
     }
 
     @Override

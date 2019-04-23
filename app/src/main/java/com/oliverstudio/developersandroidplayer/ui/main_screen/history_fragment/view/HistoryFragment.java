@@ -20,13 +20,13 @@ import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.model.Video;
 import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.presenter.HistoryPresenter;
+import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.AdapterCallback;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.HistoryRecyclerAdapter;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.RecyclerToFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryFragment extends MvpAppCompatFragment implements HistoryView, RecyclerToFragment {
+public class HistoryFragment extends MvpAppCompatFragment implements HistoryView, AdapterCallback {
 
     //tags
     public static final String FRAGMENT_TAG = "fragment_history";
