@@ -50,20 +50,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof VideoViewHolder) {
-            VideoViewHolder videoHolder = (VideoViewHolder) holder;
-            Picasso.get()
-                    .load(mVideoList.get(position).getUrlImage())
-                    .placeholder(R.drawable.placeholder_lightgrey_16x9)
-                    .into(videoHolder.thumbnailImageView);
-            videoHolder.titleTextView.setText(mVideoList.get(position).getTitle());
-            videoHolder.timePostTextView.setText(mVideoList.get(position).getTimePost());
-            videoHolder.parent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mCallback.insertVideoToDB(mVideoList.get(holder.getAdapterPosition()));
-                    mCallback.openVideo(holder.getAdapterPosition());
-                }
-            });
+            ((VideoViewHolder) holder).bind(mVideoList.get(position), mCallback);
         } else if (holder instanceof ProgressViewHolder) {
 
         }
@@ -78,18 +65,34 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 class VideoViewHolder extends RecyclerView.ViewHolder {
 
-    ConstraintLayout parent;
-    ImageView thumbnailImageView;
-    TextView titleTextView;
-    TextView timePostTextView;
+    ConstraintLayout mParent;
+    ImageView mThumbnailImageView;
+    TextView mTitleTextView;
+    TextView mTimePostTextView;
 
     VideoViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        parent = itemView.findViewById(R.id.video_container);
-        thumbnailImageView = itemView.findViewById(R.id.thumbnail_iv);
-        titleTextView = itemView.findViewById(R.id.title_iv);
-        timePostTextView = itemView.findViewById(R.id.time_post_tv);
+        mParent = itemView.findViewById(R.id.video_container);
+        mThumbnailImageView = itemView.findViewById(R.id.thumbnail_iv);
+        mTitleTextView = itemView.findViewById(R.id.title_iv);
+        mTimePostTextView = itemView.findViewById(R.id.time_post_tv);
+    }
+
+    public void bind(final Video video, final AdapterCallback callback) {
+        Picasso.get()
+                .load(video.getUrlImage())
+                .placeholder(R.drawable.placeholder_lightgrey_16x9)
+                .into(mThumbnailImageView);
+        mTitleTextView.setText(video.getTitle());
+        mTimePostTextView.setText(video.getTimePost());
+        mParent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.insertVideoToDB(video);
+                callback.openVideo(getAdapterPosition());
+            }
+        });
     }
 }
 
@@ -102,4 +105,5 @@ class ProgressViewHolder extends RecyclerView.ViewHolder {
 
         mProgressBar = itemView.findViewById(R.id.progress_bar);
     }
+
 }
