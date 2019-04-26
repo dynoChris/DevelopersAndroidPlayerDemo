@@ -99,7 +99,7 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
     }
 
     @Override
-    public void showHaventElementsText() {
+    public void showHaveNotElementsText() {
         mHavntHistoryTextView.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
         mHistoryRecyclerView.setVisibility(View.GONE);

@@ -11,6 +11,6 @@ import java.util.List;
 public interface HistoryView extends MvpView {
     void showProgressBar();
     void hideProgressBar();
+    void showHaveNotElementsText();
     void inflateHistory(List<Video> videoList);
-    void showHaventElementsText();
 }

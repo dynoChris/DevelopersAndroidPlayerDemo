@@ -29,6 +29,6 @@ public class HistoryPresenter extends MvpPresenter<HistoryView> implements BackT
     }
 
     public void showHaventElementsText() {
-        getViewState().showHaventElementsText();
+        getViewState().showHaveNotElementsText();
     }
 }
