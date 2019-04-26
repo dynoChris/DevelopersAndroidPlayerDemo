@@ -32,30 +32,30 @@ public class VideosRepository {
         mBackToPresenter = presenter;
     }
 
-    public void getVideos() {
-        Call<ListVideosResponse> call = mApiService.getVideos(
-                ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
-                "",
-                ApiYoutube.RESULTS_PER_PAGE,
-                ApiYoutube.INCLUDE_SNIPPET,
-                ApiYoutube.API_KEY_YOUTUBE);
-
-        call.enqueue(new Callback<ListVideosResponse>() {
-            @Override
-            public void onResponse(Call<ListVideosResponse> call, Response<ListVideosResponse> response) {
-                if (response.isSuccessful()) {
-                    String nextPageToken = response.body().getNextPageToken();
-                    List<Video> videos = getListVideos(response.body().getItems());
-                    mBackToPresenter.onSuccess(videos, nextPageToken);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ListVideosResponse> call, Throwable t) {
-                mBackToPresenter.onFailure();
-            }
-        });
-    }
+//    public void getVideos() {
+//        Call<ListVideosResponse> call = mApiService.getVideos(
+//                ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
+//                "",
+//                ApiYoutube.RESULTS_PER_PAGE,
+//                ApiYoutube.INCLUDE_SNIPPET,
+//                ApiYoutube.API_KEY_YOUTUBE);
+//
+//        call.enqueue(new Callback<ListVideosResponse>() {
+//            @Override
+//            public void onResponse(Call<ListVideosResponse> call, Response<ListVideosResponse> response) {
+//                if (response.isSuccessful()) {
+//                    String nextPageToken = response.body().getNextPageToken();
+//                    List<Video> videos = getListVideos(response.body().getItems());
+//                    mBackToPresenter.onSuccess(videos, nextPageToken);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ListVideosResponse> call, Throwable t) {
+//                mBackToPresenter.onFailure();
+//            }
+//        });
+//    }
 
     public void getVideos(String nextPageToken) {
         Call<ListVideosResponse> call = mApiService.getVideos(

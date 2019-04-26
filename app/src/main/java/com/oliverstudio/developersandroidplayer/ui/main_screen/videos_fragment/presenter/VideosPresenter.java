@@ -19,7 +19,7 @@ public class VideosPresenter extends MvpPresenter<VideosView> implements BackToP
     }
 
     public void getVideos() {
-        mRepository.getVideos();
+        mRepository.getVideos("");
     }
 
     public void getVideos(String nextPageToken) {
