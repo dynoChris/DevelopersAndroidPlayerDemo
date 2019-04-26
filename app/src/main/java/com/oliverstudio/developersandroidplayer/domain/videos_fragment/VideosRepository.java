@@ -18,6 +18,9 @@ import javax.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class VideosRepository {
 
@@ -32,54 +35,28 @@ public class VideosRepository {
         mBackToPresenter = presenter;
     }
 
-//    public void getVideos() {
-//        Call<ListVideosResponse> call = mApiService.getVideos(
-//                ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
-//                "",
-//                ApiYoutube.RESULTS_PER_PAGE,
-//                ApiYoutube.INCLUDE_SNIPPET,
-//                ApiYoutube.API_KEY_YOUTUBE);
-//
-//        call.enqueue(new Callback<ListVideosResponse>() {
-//            @Override
-//            public void onResponse(Call<ListVideosResponse> call, Response<ListVideosResponse> response) {
-//                if (response.isSuccessful()) {
-//                    String nextPageToken = response.body().getNextPageToken();
-//                    List<Video> videos = getListVideos(response.body().getItems());
-//                    mBackToPresenter.onSuccess(videos, nextPageToken);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ListVideosResponse> call, Throwable t) {
-//                mBackToPresenter.onFailure();
-//            }
-//        });
-//    }
-
     public void getVideos(String nextPageToken) {
-        Call<ListVideosResponse> call = mApiService.getVideos(
-                ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
+        mApiService.getVideos(ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
                 nextPageToken,
                 ApiYoutube.RESULTS_PER_PAGE,
                 ApiYoutube.INCLUDE_SNIPPET,
-                ApiYoutube.API_KEY_YOUTUBE);
+                ApiYoutube.API_KEY_YOUTUBE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<ListVideosResponse>() {
+                    @Override
+                    public void call(ListVideosResponse listVideosResponse) {
+                        String nextPageToken = listVideosResponse.getNextPageToken();
+                        List<Video> videos = getListVideos(listVideosResponse.getItems());
+                        mBackToPresenter.onSuccess(videos, nextPageToken);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable exception) {
+                        mBackToPresenter.onFailure();
+                    }
+                });
 
-        call.enqueue(new Callback<ListVideosResponse>() {
-            @Override
-            public void onResponse(Call<ListVideosResponse> call, Response<ListVideosResponse> response) {
-                if (response.isSuccessful()) {
-                    String nextPageToken = response.body().getNextPageToken();
-                    List<Video> videos = getListVideos(response.body().getItems());
-                    mBackToPresenter.onSuccess(videos, nextPageToken);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ListVideosResponse> call, Throwable t) {
-                mBackToPresenter.onFailure();
-            }
-        });
     }
 
     private List<Video> getListVideos(List<Item> items) {
@@ -99,6 +76,7 @@ public class VideosRepository {
 //        if (thumbnails.getMaxres() != null) {
 //            return thumbnails.getMaxres().getUrl();
 //        }
+
         if (thumbnails.getStandard() != null) {
             return thumbnails.getStandard().getUrl();
         }
