@@ -12,7 +12,7 @@ public interface DaoAccess {
     @Insert
     void insertVideo(VideoEntity video);
 
-    @Query("SELECT * FROM VideoEntity")
+    @Query("SELECT * FROM " + VideoEntity.TABLE_NAME)
     List<VideoEntity> fetchAllVideos();
 
 //    @Query("SELECT * FROM Movie WHERE id =:id")

@@ -4,8 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = VideoEntity.TABLE_NAME)
 public class VideoEntity {
+
+    public static final String TABLE_NAME = "watched_table";
 
     @PrimaryKey (autoGenerate = true)
     private int id;
