@@ -1,5 +1,7 @@
 package com.oliverstudio.developersandroidplayer.domain.videos_fragment;
 
+import android.annotation.SuppressLint;
+
 import com.oliverstudio.developersandroidplayer.App;
 import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
 import com.oliverstudio.developersandroidplayer.data.db.VideoEntity;
@@ -15,12 +17,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+
 
 public class VideosRepository {
 
@@ -35,6 +38,7 @@ public class VideosRepository {
         mBackToPresenter = presenter;
     }
 
+    @SuppressLint("CheckResult")
     public void getVideos(String nextPageToken) {
         mApiService.getVideos(ApiYoutube.DEVELOPERS_ANDROID_PLAYLIST,
                 nextPageToken,
@@ -43,20 +47,33 @@ public class VideosRepository {
                 ApiYoutube.API_KEY_YOUTUBE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ListVideosResponse>() {
+                .subscribe(new Consumer<ListVideosResponse>() {
                     @Override
-                    public void call(ListVideosResponse listVideosResponse) {
+                    public void accept(ListVideosResponse listVideosResponse) throws Exception {
                         String nextPageToken = listVideosResponse.getNextPageToken();
                         List<Video> videos = getListVideos(listVideosResponse.getItems());
                         mBackToPresenter.onSuccess(videos, nextPageToken);
                     }
-                }, new Action1<Throwable>() {
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void call(Throwable exception) {
+                    public void accept(Throwable throwable) throws Exception {
                         mBackToPresenter.onFailure();
                     }
                 });
 
+//                        new Action1<ListVideosResponse>() {
+//                            @Override
+//                            public void call(ListVideosResponse listVideosResponse) {
+//                                String nextPageToken = listVideosResponse.getNextPageToken();
+//                                List<Video> videos = getListVideos(listVideosResponse.getItems());
+//                                mBackToPresenter.onSuccess(videos, nextPageToken);
+//                            }
+//                        }, new Action1<Throwable>() {
+//                            @Override
+//                            public void call(Throwable exception) {
+//                                mBackToPresenter.onFailure();
+//                            }
+//                        });
     }
 
     private List<Video> getListVideos(List<Item> items) {

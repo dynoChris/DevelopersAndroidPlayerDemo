@@ -7,10 +7,12 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.schedulers.Schedulers;
+
 
 @Module
 public class RetrofitModule {
@@ -20,7 +22,7 @@ public class RetrofitModule {
     public ApiYoutube provideApiYoutube() {
         return new Retrofit.Builder()
                 .baseUrl(ApiYoutube.BASE_URL)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
                 .build().create(ApiYoutube.class);
     }

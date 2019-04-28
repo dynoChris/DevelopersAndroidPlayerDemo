@@ -2,9 +2,9 @@ package com.oliverstudio.developersandroidplayer.network;
 
 import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 public interface ApiYoutube {
 
