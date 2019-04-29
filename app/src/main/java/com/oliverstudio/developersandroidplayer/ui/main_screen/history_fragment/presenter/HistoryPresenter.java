@@ -19,6 +19,7 @@ public class HistoryPresenter extends MvpPresenter<HistoryView> implements BackT
     }
 
     public void getHistoryWatchedFromDB() {
+        getViewState().showProgressBar();
         mRepository.getHistoryWatchedFromDB();
     }
 

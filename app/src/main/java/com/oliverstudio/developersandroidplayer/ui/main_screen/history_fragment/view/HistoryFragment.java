@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
@@ -22,6 +21,7 @@ import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.presenter.HistoryPresenter;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.AdapterCallback;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters.HistoryRecyclerAdapter;
+import com.oliverstudio.developersandroidplayer.utils.androidx_moxy.MvpAppCompatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
     //views
     private ProgressBar mProgressBar;
     private RecyclerView mHistoryRecyclerView;
-    private TextView mHavntHistoryTextView;
+    private TextView mHaveNotHistoryTextView;
 
     //general vars
     @InjectPresenter
@@ -65,15 +65,14 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
         if (savedInstanceState == null) {
             mPresenter.getHistoryWatchedFromDB();
         } else {
-            hideProgressBar();
+            if (mVideoList.size() > 0) hideProgressBar();
         }
-
     }
 
     private void initViews(View view) {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mHistoryRecyclerView = view.findViewById(R.id.recycler_view);
-        mHavntHistoryTextView = view.findViewById(R.id.havnt_history_tv);
+        mHaveNotHistoryTextView = view.findViewById(R.id.havnt_history_tv);
     }
 
     private void initRecycler() {
@@ -88,19 +87,19 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
     public void showProgressBar() {
         mProgressBar.setVisibility(View.VISIBLE);
         mHistoryRecyclerView.setVisibility(View.GONE);
-        mHavntHistoryTextView.setVisibility(View.GONE);
+        mHaveNotHistoryTextView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
         mHistoryRecyclerView.setVisibility(View.VISIBLE);
-        mHavntHistoryTextView.setVisibility(View.GONE);
+        mHaveNotHistoryTextView.setVisibility(View.GONE);
     }
 
     @Override
     public void showHaveNotElementsText() {
-        mHavntHistoryTextView.setVisibility(View.VISIBLE);
+        mHaveNotHistoryTextView.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
         mHistoryRecyclerView.setVisibility(View.GONE);
     }
