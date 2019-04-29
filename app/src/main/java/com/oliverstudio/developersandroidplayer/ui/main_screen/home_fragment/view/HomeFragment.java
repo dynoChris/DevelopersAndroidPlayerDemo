@@ -1,16 +1,16 @@
 package com.oliverstudio.developersandroidplayer.ui.main_screen.home_fragment.view;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.home_fragment.presenter.HomePresenter;
+import com.oliverstudio.developersandroidplayer.utils.androidx_moxy.MvpAppCompatFragment;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 

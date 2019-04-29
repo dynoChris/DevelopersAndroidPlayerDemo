@@ -1,6 +1,6 @@
 package com.oliverstudio.developersandroidplayer.di.modules;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 
 import com.oliverstudio.developersandroidplayer.App;
 import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;

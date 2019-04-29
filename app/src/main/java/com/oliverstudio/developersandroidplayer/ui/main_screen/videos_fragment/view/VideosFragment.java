@@ -2,17 +2,16 @@ package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
@@ -22,6 +21,7 @@ import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.p
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.AdapterCallback;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.VideoRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.utils.Utils;
+import com.oliverstudio.developersandroidplayer.utils.androidx_moxy.MvpAppCompatFragment;
 
 import java.util.ArrayList;
 import java.util.List;

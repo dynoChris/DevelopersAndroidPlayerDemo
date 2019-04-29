@@ -1,7 +1,7 @@
 package com.oliverstudio.developersandroidplayer.ui.youtube_player_screen;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
