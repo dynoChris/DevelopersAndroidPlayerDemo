@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class HistoryRepository {
@@ -33,11 +34,16 @@ public class HistoryRepository {
         mDatabase.daoAccess().fetchAllVideos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<VideoEntity>>() {
+                .map(new Function<List<VideoEntity>, List<Video>>() {
                     @Override
-                    public void accept(List<VideoEntity> videoEntities) throws Exception {
-                        List<Video> videoList = getVideoList(videoEntities);
-                        mBackToPresenter.onSuccess(videoList);
+                    public List<Video> apply(List<VideoEntity> videoEntities) throws Exception {
+                        return getVideoList(videoEntities);
+                    }
+                })
+                .subscribe(new Consumer<List<Video>>() {
+                    @Override
+                    public void accept(List<Video> videos) throws Exception {
+                        mBackToPresenter.onSuccess(videos);
                     }
                 });
     }
