@@ -61,19 +61,6 @@ public class VideosRepository {
                     }
                 });
 
-//                        new Action1<ListVideosResponse>() {
-//                            @Override
-//                            public void call(ListVideosResponse listVideosResponse) {
-//                                String nextPageToken = listVideosResponse.getNextPageToken();
-//                                List<Video> videos = getListVideos(listVideosResponse.getItems());
-//                                mBackToPresenter.onSuccess(videos, nextPageToken);
-//                            }
-//                        }, new Action1<Throwable>() {
-//                            @Override
-//                            public void call(Throwable exception) {
-//                                mBackToPresenter.onFailure();
-//                            }
-//                        });
     }
 
     private List<Video> getListVideos(List<Item> items) {
