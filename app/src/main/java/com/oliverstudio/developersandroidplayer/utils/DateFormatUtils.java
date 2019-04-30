@@ -2,8 +2,6 @@ package com.oliverstudio.developersandroidplayer.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class DateFormatUtils {
 
