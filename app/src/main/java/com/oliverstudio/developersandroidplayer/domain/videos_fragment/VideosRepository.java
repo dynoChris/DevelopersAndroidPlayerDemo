@@ -11,6 +11,7 @@ import com.oliverstudio.developersandroidplayer.data.network.response.list_video
 import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.ListVideosResponse;
 import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.Thumbnails;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.presenter.VideosPresenter;
+import com.oliverstudio.developersandroidplayer.utils.DateFormatUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,8 @@ public class VideosRepository {
             String idVideo = items.get(i).getSnippet().getResourceId().getVideoId();
             String urlImage = getUrlPicture(items.get(i).getSnippet().getThumbnails());
             String title = items.get(i).getSnippet().getTitle();
-            String timePost = items.get(i).getSnippet().getPublishedAt();
+            String rawTimePost = items.get(i).getSnippet().getPublishedAt();
+            String timePost = DateFormatUtils.modifyDate(rawTimePost);
             videos.add(new Video(idVideo, urlImage, title, timePost));
         }
         return videos;
