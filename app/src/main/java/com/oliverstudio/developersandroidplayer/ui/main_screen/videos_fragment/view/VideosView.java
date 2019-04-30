@@ -3,7 +3,7 @@ package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.data.models.Video;
 
 import java.util.List;
 

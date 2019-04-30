@@ -1,6 +1,6 @@
-package com.oliverstudio.developersandroidplayer.network;
+package com.oliverstudio.developersandroidplayer.data.network;
 
-import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
+import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.ListVideosResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

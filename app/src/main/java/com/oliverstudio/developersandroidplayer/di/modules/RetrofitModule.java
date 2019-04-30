@@ -1,7 +1,7 @@
 package com.oliverstudio.developersandroidplayer.di.modules;
 
 import com.google.gson.GsonBuilder;
-import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
+import com.oliverstudio.developersandroidplayer.data.network.ApiYoutube;
 
 import javax.inject.Singleton;
 

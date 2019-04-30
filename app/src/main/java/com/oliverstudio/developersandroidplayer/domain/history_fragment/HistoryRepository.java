@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import com.oliverstudio.developersandroidplayer.App;
 import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
 import com.oliverstudio.developersandroidplayer.data.db.VideoEntity;
-import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.data.models.Video;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.presenter.HistoryPresenter;
 
 import java.util.ArrayList;

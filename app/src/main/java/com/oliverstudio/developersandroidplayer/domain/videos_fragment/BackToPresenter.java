@@ -1,6 +1,6 @@
 package com.oliverstudio.developersandroidplayer.domain.videos_fragment;
 
-import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.data.models.Video;
 
 import java.util.List;
 

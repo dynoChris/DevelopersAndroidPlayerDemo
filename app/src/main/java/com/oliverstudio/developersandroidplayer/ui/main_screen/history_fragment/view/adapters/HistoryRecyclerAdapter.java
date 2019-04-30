@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.oliverstudio.developersandroidplayer.R;
-import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.data.models.Video;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

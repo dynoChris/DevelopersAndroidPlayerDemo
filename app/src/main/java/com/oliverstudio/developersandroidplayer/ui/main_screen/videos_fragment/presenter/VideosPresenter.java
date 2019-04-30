@@ -2,7 +2,7 @@ package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.oliverstudio.developersandroidplayer.data.model.Video;
+import com.oliverstudio.developersandroidplayer.data.models.Video;
 import com.oliverstudio.developersandroidplayer.domain.videos_fragment.BackToPresenter;
 import com.oliverstudio.developersandroidplayer.domain.videos_fragment.VideosRepository;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.VideosView;

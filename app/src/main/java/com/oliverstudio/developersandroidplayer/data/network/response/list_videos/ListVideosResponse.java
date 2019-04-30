@@ -1,5 +1,5 @@
 
-package com.oliverstudio.developersandroidplayer.network.response.list_videos;
+package com.oliverstudio.developersandroidplayer.data.network.response.list_videos;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.data.model;
+package com.oliverstudio.developersandroidplayer.data.models;
 
 public class Video {
 

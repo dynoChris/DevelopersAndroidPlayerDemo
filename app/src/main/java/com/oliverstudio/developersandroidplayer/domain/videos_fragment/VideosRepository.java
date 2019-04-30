@@ -5,11 +5,11 @@ import android.annotation.SuppressLint;
 import com.oliverstudio.developersandroidplayer.App;
 import com.oliverstudio.developersandroidplayer.data.db.VideoDatabase;
 import com.oliverstudio.developersandroidplayer.data.db.VideoEntity;
-import com.oliverstudio.developersandroidplayer.data.model.Video;
-import com.oliverstudio.developersandroidplayer.network.ApiYoutube;
-import com.oliverstudio.developersandroidplayer.network.response.list_videos.Item;
-import com.oliverstudio.developersandroidplayer.network.response.list_videos.ListVideosResponse;
-import com.oliverstudio.developersandroidplayer.network.response.list_videos.Thumbnails;
+import com.oliverstudio.developersandroidplayer.data.models.Video;
+import com.oliverstudio.developersandroidplayer.data.network.ApiYoutube;
+import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.Item;
+import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.ListVideosResponse;
+import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.Thumbnails;
 import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.presenter.VideosPresenter;
 
 import java.util.ArrayList;
@@ -20,9 +20,6 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class VideosRepository {
