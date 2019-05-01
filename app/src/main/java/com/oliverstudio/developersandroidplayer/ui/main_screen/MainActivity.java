@@ -1,11 +1,14 @@
 package com.oliverstudio.developersandroidplayer.ui.main_screen;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.fragment.app.Fragment;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 
 import com.oliverstudio.developersandroidplayer.R;
@@ -19,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
 
+    //general vars
+    private HomeFragment mHomeFragment;
+    private VideosFragment mVideosFragment;
+    private HistoryFragment mHistoryFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,52 +34,66 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        //init views
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
 
         mBottomNavigationView.setSelectedItemId(R.id.nav_videos);
         mBottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new VideosFragment(), VideosFragment.FRAGMENT_TAG)
-                    .commit();
-        }
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, new HomeFragment(), HomeFragment.FRAGMENT_TAG)
+                    .add(R.id.fragment_container, new VideosFragment(), VideosFragment.FRAGMENT_TAG)
+                    .add(R.id.fragment_container, new HistoryFragment(), HistoryFragment.FRAGMENT_TAG)
+                    .commitNow();
 
+            fetchFragmentsFromFragmentManager();
+
+            getSupportFragmentManager().beginTransaction()
+                    .hide(mHomeFragment)
+                    .hide(mVideosFragment)
+                    .hide(mHistoryFragment)
+                    .show(mVideosFragment)
+                    .commit();
+        } else {
+            fetchFragmentsFromFragmentManager();
+        }
+    }
+
+    private void fetchFragmentsFromFragmentManager() {
+        mHomeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.FRAGMENT_TAG);
+        mVideosFragment = (VideosFragment) getSupportFragmentManager().findFragmentByTag(VideosFragment.FRAGMENT_TAG);
+        mHistoryFragment = (HistoryFragment) getSupportFragmentManager().findFragmentByTag(HistoryFragment.FRAGMENT_TAG);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    String fragmentTag = "";
-                    Fragment selectedFragment = null;
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    switch (item.getItemId()) {
-                        case R.id.nav_home:
-                            fragmentTag = HomeFragment.FRAGMENT_TAG;
-                            selectedFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
-                            if (selectedFragment == null) selectedFragment = new HomeFragment();
-                            break;
-                        case R.id.nav_videos:
-                            fragmentTag = VideosFragment.FRAGMENT_TAG;
-                            selectedFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
-                            if (selectedFragment == null) selectedFragment = new VideosFragment();
-                            break;
-                        case R.id.nav_history:
-                            fragmentTag = HistoryFragment.FRAGMENT_TAG;
-                            selectedFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
-                            if (selectedFragment == null) selectedFragment = new HistoryFragment();
-                            break;
-                    }
-
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, selectedFragment, fragmentTag)
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+                    getSupportFragmentManager().beginTransaction()
+                            .show(mHomeFragment)
+                            .hide(mVideosFragment)
+                            .hide(mHistoryFragment)
                             .commit();
-
-                    return true;
-                }
-            };
+                    break;
+                case R.id.nav_videos:
+                    getSupportFragmentManager().beginTransaction()
+                            .hide(mHomeFragment)
+                            .show(mVideosFragment)
+                            .hide(mHistoryFragment)
+                            .commit();
+                    break;
+                case R.id.nav_history:
+                    getSupportFragmentManager().beginTransaction()
+                            .hide(mHomeFragment)
+                            .hide(mVideosFragment)
+                            .show(mHistoryFragment)
+                            .commit();
+                    break;
+            }
+            return true;
+        }
+    };
 
 }
