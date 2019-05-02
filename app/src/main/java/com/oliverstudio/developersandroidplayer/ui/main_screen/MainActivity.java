@@ -8,6 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 
@@ -46,23 +47,11 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, new HistoryFragment(), HistoryFragment.FRAGMENT_TAG)
                     .commitNow();
 
-            fetchFragmentsFromFragmentManager();
-
-            getSupportFragmentManager().beginTransaction()
-                    .hide(mHomeFragment)
-                    .hide(mVideosFragment)
-                    .hide(mHistoryFragment)
-                    .show(mVideosFragment)
-                    .commit();
+            initFragments();
+            showFragment(mVideosFragment);
         } else {
-            fetchFragmentsFromFragmentManager();
+            initFragments();
         }
-    }
-
-    private void fetchFragmentsFromFragmentManager() {
-        mHomeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.FRAGMENT_TAG);
-        mVideosFragment = (VideosFragment) getSupportFragmentManager().findFragmentByTag(VideosFragment.FRAGMENT_TAG);
-        mHistoryFragment = (HistoryFragment) getSupportFragmentManager().findFragmentByTag(HistoryFragment.FRAGMENT_TAG);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,29 +60,45 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    getSupportFragmentManager().beginTransaction()
-                            .show(mHomeFragment)
-                            .hide(mVideosFragment)
-                            .hide(mHistoryFragment)
-                            .commit();
+                    showFragment(mHomeFragment);
                     break;
                 case R.id.nav_videos:
-                    getSupportFragmentManager().beginTransaction()
-                            .hide(mHomeFragment)
-                            .show(mVideosFragment)
-                            .hide(mHistoryFragment)
-                            .commit();
+                    showFragment(mVideosFragment);
                     break;
                 case R.id.nav_history:
-                    getSupportFragmentManager().beginTransaction()
-                            .hide(mHomeFragment)
-                            .hide(mVideosFragment)
-                            .show(mHistoryFragment)
-                            .commit();
+                    showFragment(mHistoryFragment);
                     break;
             }
             return true;
         }
     };
+
+    private void initFragments() {
+        mHomeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.FRAGMENT_TAG);
+        mVideosFragment = (VideosFragment) getSupportFragmentManager().findFragmentByTag(VideosFragment.FRAGMENT_TAG);
+        mHistoryFragment = (HistoryFragment) getSupportFragmentManager().findFragmentByTag(HistoryFragment.FRAGMENT_TAG);
+    }
+
+    private void showFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .hide(mHomeFragment)
+                .hide(mVideosFragment)
+                .hide(mHistoryFragment)
+                .commit();
+
+        if (fragment instanceof HomeFragment){
+            getSupportFragmentManager().beginTransaction()
+                    .show(mHomeFragment)
+                    .commit();
+        } else if (fragment instanceof VideosFragment) {
+            getSupportFragmentManager().beginTransaction()
+                    .show(mVideosFragment)
+                    .commit();
+        } else if (fragment instanceof HistoryFragment) {
+            getSupportFragmentManager().beginTransaction()
+                    .show(mHistoryFragment)
+                    .commit();
+        }
+    }
 
 }
