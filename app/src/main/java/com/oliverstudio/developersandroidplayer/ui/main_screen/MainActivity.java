@@ -19,7 +19,7 @@ import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.v
 
 public class MainActivity extends AppCompatActivity {
 
-    //view
+    //views
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
 
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             initFragments();
         }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -84,21 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 .hide(mHomeFragment)
                 .hide(mVideosFragment)
                 .hide(mHistoryFragment)
+                .show(fragment)
                 .commit();
-
-        if (fragment instanceof HomeFragment){
-            getSupportFragmentManager().beginTransaction()
-                    .show(mHomeFragment)
-                    .commit();
-        } else if (fragment instanceof VideosFragment) {
-            getSupportFragmentManager().beginTransaction()
-                    .show(mVideosFragment)
-                    .commit();
-        } else if (fragment instanceof HistoryFragment) {
-            getSupportFragmentManager().beginTransaction()
-                    .show(mHistoryFragment)
-                    .commit();
-        }
     }
 
 }
