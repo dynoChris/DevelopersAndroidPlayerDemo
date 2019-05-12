@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +17,9 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.oliverstudio.developersandroidplayer.R;
 import com.oliverstudio.developersandroidplayer.data.models.Video;
 import com.oliverstudio.developersandroidplayer.data.network.ApiYoutube;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.presenter.VideosPresenter;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.AdapterCallback;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.adapters.VideoRecyclerAdapter;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.presenter.VideosPresenter;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.view.adapters.AdapterCallback;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.view.adapters.VideoRecyclerAdapter;
 import com.oliverstudio.developersandroidplayer.utils.Utils;
 import com.oliverstudio.developersandroidplayer.utils.androidx_moxy.MvpAppCompatFragment;
 

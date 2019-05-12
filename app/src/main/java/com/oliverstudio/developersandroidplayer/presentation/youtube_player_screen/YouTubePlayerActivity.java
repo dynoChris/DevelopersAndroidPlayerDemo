@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.youtube_player_screen;
+package com.oliverstudio.developersandroidplayer.presentation.youtube_player_screen;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen;
 
 import android.os.Bundle;
 
@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment;
 import android.view.MenuItem;
 
 import com.oliverstudio.developersandroidplayer.R;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.HistoryFragment;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.home_fragment.view.HomeFragment;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view.VideosFragment;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.view.HistoryFragment;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.home_fragment.view.HomeFragment;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.view.VideosFragment;
 
 public class MainActivity extends AppCompatActivity {
 

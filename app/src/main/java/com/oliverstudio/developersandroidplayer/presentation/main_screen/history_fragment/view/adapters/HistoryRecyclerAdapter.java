@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen.history_fragment.view.adapters;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.view.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;

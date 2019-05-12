@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main_screen.MainActivity">
+        <activity android:name=".presentation.main_screen.MainActivity">
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN"
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.youtube_player_screen.YouTubePlayerActivity" />
+        <activity android:name=".presentation.youtube_player_screen.YouTubePlayerActivity" />
     </application>
 
 </manifest>

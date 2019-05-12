@@ -10,7 +10,7 @@ import com.oliverstudio.developersandroidplayer.data.network.ApiYoutube;
 import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.Item;
 import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.ListVideosResponse;
 import com.oliverstudio.developersandroidplayer.data.network.response.list_videos.Thumbnails;
-import com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.presenter.VideosPresenter;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.presenter.VideosPresenter;
 import com.oliverstudio.developersandroidplayer.utils.DateFormatUtils;
 
 import java.util.ArrayList;

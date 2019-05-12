@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.ui.main_screen.videos_fragment.view;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.view;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
@@ -8,10 +8,9 @@ import com.oliverstudio.developersandroidplayer.data.models.Video;
 import java.util.List;
 
 @StateStrategyType(OneExecutionStateStrategy.class)
-public interface VideosView extends MvpView {
+public interface HistoryView extends MvpView {
     void showProgressBar();
     void hideProgressBar();
-    void showFooter();
-    void hideFooter();
-    void inflateVideos(List<Video> videos, String nextPageToken);
+    void showHaveNotElementsText();
+    void inflateHistory(List<Video> videoList);
 }
