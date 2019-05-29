@@ -1,11 +1,11 @@
-package com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.presenter;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.oliverstudio.developersandroidplayer.data.models.Video;
 import com.oliverstudio.developersandroidplayer.domain.history_fragment.BackToPresenter;
 import com.oliverstudio.developersandroidplayer.domain.history_fragment.HistoryRepository;
-import com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.view.HistoryView;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.HistoryView;
 
 import java.util.List;
 

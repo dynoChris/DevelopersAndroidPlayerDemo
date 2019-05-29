@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.view.adapters;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;

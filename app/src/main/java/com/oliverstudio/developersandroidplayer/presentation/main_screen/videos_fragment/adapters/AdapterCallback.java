@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.view.adapters;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.adapters;
 
 import com.oliverstudio.developersandroidplayer.data.models.Video;
 

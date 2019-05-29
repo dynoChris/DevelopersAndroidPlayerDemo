@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment;
 import android.view.MenuItem;
 
 import com.oliverstudio.developersandroidplayer.R;
-import com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.view.HistoryFragment;
-import com.oliverstudio.developersandroidplayer.presentation.main_screen.home_fragment.view.HomeFragment;
-import com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.view.VideosFragment;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.history_fragment.HistoryFragment;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.home_fragment.HomeFragment;
+import com.oliverstudio.developersandroidplayer.presentation.main_screen.videos_fragment.VideosFragment;
 
 public class MainActivity extends AppCompatActivity {
 

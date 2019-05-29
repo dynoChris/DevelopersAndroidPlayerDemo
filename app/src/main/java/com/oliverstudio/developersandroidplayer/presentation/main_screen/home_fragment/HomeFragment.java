@@ -1,4 +1,4 @@
-package com.oliverstudio.developersandroidplayer.presentation.main_screen.home_fragment.view;
+package com.oliverstudio.developersandroidplayer.presentation.main_screen.home_fragment;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.oliverstudio.developersandroidplayer.R;
-import com.oliverstudio.developersandroidplayer.presentation.main_screen.home_fragment.presenter.HomePresenter;
 import com.oliverstudio.developersandroidplayer.utils.androidx_moxy.MvpAppCompatFragment;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView {
